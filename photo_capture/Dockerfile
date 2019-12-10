@@ -13,7 +13,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt install -y python-opencv python-pip vim-tiny mosquitto-clients libopencv-dev
 RUN pip install paho-mqtt
-RUN pip install numpy
+RUN pip install numpy, pandas
+RUN pip install geopy, folium, osmnx
 RUN apt install nano
 
 RUN mkdir /photos
