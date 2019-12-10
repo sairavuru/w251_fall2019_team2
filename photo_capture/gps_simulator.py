@@ -1,7 +1,7 @@
 # @Author: sai.ravuru
 # @Date:   2019-12-02T11:42:19-08:00
 # @Last modified by:   sai.ravuru
-# @Last modified time: 2019-12-09T22:22:51-08:00
+# @Last modified time: 2019-12-09T23:04:18-08:00
 
 import pandas as pd
 import numpy as np
@@ -114,17 +114,18 @@ def visual(point_dict):
     m = folium.Map(location=[list(point_dict.values())[0][0],list(point_dict.values())[0][1]], zoom_start=12)
 
     for i, val in enumerate(list(point_dict.keys())):
-        print(point_dict[val][3])
         try:
             encoded = base64.b64encode(open(list(point_dict.values())[i][2], 'rb').read())
             html = '<img src="data:image/png;base64,{}">'.format
             iframe = IFrame(html(encoded.decode('utf-8')), width=(width*resolution), height=(height*resolution))
             popup = folium.Popup(iframe, max_width=200)
+            icon = folium.Icon(color='red')
 
         except:
             popup='<i>Speed is {} mph</i>'.format(int(point_dict[val][3]))
+            icon = folium.Icon(color='green')
 
-        folium.Marker([list(point_dict.values())[i][0],list(point_dict.values())[i][1]], popup=popup, tooltip=val).add_to(m)
+        folium.Marker([list(point_dict.values())[i][0],list(point_dict.values())[i][1]], popup=popup, tooltip=val, icon=icon).add_to(m)
 
     m.save('test.html')
     #webbrowser.open('test.html')
