@@ -13,15 +13,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt install -y python-opencv python-pip vim-tiny mosquitto-clients libopencv-dev
 RUN pip install paho-mqtt
-RUN pip install numpy pandas==0.25.3
-RUN pip install geopy folium osmnx
+RUN pip install numpy
 RUN apt install nano
 
 RUN mkdir /photos
 WORKDIR /photos
 
 COPY app.py /usr/src/app/
-COPY gps_simulator.py /usr/src/app/
 COPY gps_logs.csv /usr/src/app/
 
 CMD ["python","/usr/src/app/app.py"]

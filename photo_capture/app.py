@@ -1,7 +1,7 @@
 # @Author: sai.ravuru
 # @Date:   2019-12-08T23:00:30-08:00
 # @Last modified by:   sai.ravuru
-# @Last modified time: 2019-12-09T22:22:37-08:00
+# @Last modified time: 2019-12-10T15:20:09-08:00
 
 
 
@@ -89,8 +89,8 @@ while(True):
 			msg_out = base64.b64encode(msg)
 			client = mqtt.Client()
 			client.connect("iot-broker",1883,60)
-			client.publish("topic/dream_catcher", msg_out);
-			client.disconnect();
+			client.publish("topic/dream_catcher", msg_out)
+			client.disconnect()
 
 
 

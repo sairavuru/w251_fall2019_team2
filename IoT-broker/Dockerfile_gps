@@ -1,0 +1,21 @@
+# build this: e.g docker build -t broker .
+# to run this container, do:
+# on the host:
+# make sure you're in the X environment
+# xhost +
+# docker run --rm -ti --privileged -e DISPLAY -v /tmp:/tmp --network dream_catcher --name broker broker
+#FROM python:3.6.8-alpine3.8
+
+FROM w251/cuda:dev-tx2-4.2.1_b97
+ARG URL=http://169.44.201.108:7002/jetpacks/4.2.1
+
+RUN apt-get update && apt install -y git pkg-config wget build-essential cmake unzip python-pip mosquitto-clients
+
+RUN pip install numpy paho-mqtt ibm-cos-sdk pandas==0.25.3 geopy folium osmnx
+
+WORKDIR /
+COPY broker.py /usr/src/app/
+COPY gps_simulator.py /usr/src/app/
+COPY gps_logs.csv /usr/src/app/
+
+CMD ["python","/usr/src/app/broker.py"]
