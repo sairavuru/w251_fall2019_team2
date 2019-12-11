@@ -53,6 +53,7 @@ def on_message(client, userdata, msg):
     gps_simulator()
 
     cos.upload_fileobj(img_np,  credentials['BUCKET'], 'face-' + str(i) + '.jpg')
+    #cos.upload_fileobj(<html file>,  credentials['BUCKET'], 'face-' + str(i) + '.jpg')
     #URL: https://s3.us.cloud-object-storage.appdomain.cloud/w251-sr
 
 

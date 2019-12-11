@@ -16,7 +16,7 @@ import cv2
 import base64
 import paho.mqtt.client as mqtt
 from datetime import datetime
-import gps_simulator
+#import gps_simulator
 
 ## use external camera
 cap = cv2.VideoCapture(1)
