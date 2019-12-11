@@ -14,8 +14,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt install -y git cmake unzip wget pkg-config build-essential python-opencv python-pip vim-tiny mosquitto-clients libopencv-dev libspatialindex-dev libfreetype6-dev libgdal-dev
 RUN pip install paho-mqtt
 RUN pip install numpy pandas 
-RUN pip install gdal folium geopy
-RUN pip install --upgrade cython osmnx==0.9
+RUN pip install folium geopy
+RUN pip install --upgrade Cython 
+RUN pip install git+git://github.com/larsyencken/proj
+RUN pip install pyproj==1.9.6 osmnx==0.9
 RUN apt install nano
 
 RUN mkdir /photos

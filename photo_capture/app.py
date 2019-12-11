@@ -16,7 +16,7 @@ import cv2
 import base64
 import paho.mqtt.client as mqtt
 from datetime import datetime
-#import gps_simulator
+import gps_simulator
 
 ## use external camera
 cap = cv2.VideoCapture(1)
@@ -31,14 +31,16 @@ eye_cascade = cv2.CascadeClassifier(eye_cascade_path)
 driver_sleeping = False
 
 #Read in simulated GPS logs
-gps_df = pd.read_csv('gps_logs.csv')
+gps_df = pd.read_csv('/usr/src/app/gps_logs.csv')
 gps_df.loc[:, 'Datetime'] = gps_df['Datetime'].apply(pd.to_datetime)
+#print(gps_df.head())
 pic_count = 0
 
 # Speed
 #import random
 #speed = random.randint(0,200)
 speed = int(gps_df.loc[pic_count, 'mph'])
+#print(speed)
 
 
 
