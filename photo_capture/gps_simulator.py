@@ -130,8 +130,9 @@ def visual(point_dict):
     m.save('test.html')
     #webbrowser.open('test.html')
 
-if __name__ == "__main__":
-    filename = 'gps_logs.csv'
+#if __name__ == "__main__":
+def main():
+    filename = '/usr/src/app/gps_logs.csv'
     gps_df = pd.read_csv(filename)
     gps_df.loc[:, 'Datetime'] = gps_df['Datetime'].apply(pd.to_datetime)
     #print(gps_df.head())

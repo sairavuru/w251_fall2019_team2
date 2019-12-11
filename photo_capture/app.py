@@ -18,6 +18,17 @@ import paho.mqtt.client as mqtt
 from datetime import datetime
 import gps_simulator
 
+broker="172.17.0.1"
+port=1883
+
+def on_publish(client, userdata, result):
+	print("TX2: Data published")
+	pass
+
+client = mqtt.Client("admin")
+client.on_publish = on_publish
+client.connect(broker, port)
+
 ## use external camera
 cap = cv2.VideoCapture(1)
 
@@ -69,6 +80,7 @@ while(True):
 
 		# Are the eyes closed, len(eyes) == 0 if eyes could not be detected on the face
 		if len(eyes) == 0:
+			print('Sleeping face detected!')
 			# Warning message
 			cv2.putText(gray_face, "DRIVER SLEEPING!", (int(0.05*gray_face.shape[1]),int(0.1*gray_face.shape[0])), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255,0,0), 1, cv2.LINE_AA)
 			# Time Stamp
@@ -89,16 +101,19 @@ while(True):
 			# Send to IoT Broker
 			msg = cv2.imencode('.jpg',gray_face)[1]
 			msg_out = base64.b64encode(msg)
-			client = mqtt.Client()
-			client.connect("iot-broker",1883,60)
+			#client = mqtt.Client()
+			#client.connect("iot-broker",1883,60)
 			client.publish("topic/dream_catcher", msg_out)
-			client.disconnect()
+			#client.disconnect()
 
-
-
-	k = cv2.waitKey(1)
-	if k==27:
+			gps_simulator.main() #Run GPS simulation
+	#Send logic
+	#k = cv2.waitKey(1)
+	#if k==27:
+	#	break
+	
+	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 
-gps_simulator() #Run GPS simulation
+cap.release()
 cv2.destroyAllWindows()
