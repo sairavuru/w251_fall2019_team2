@@ -1,6 +1,6 @@
 FROM ubuntu
 
-# build this: e.g docker build -t photo_capture .
+# build this: e.g sudo docker build -t photo_capture .
 # to run this container, do:
 # on the host:
 # make sure you're in the X environment
